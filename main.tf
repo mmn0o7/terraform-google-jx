@@ -8,8 +8,8 @@ terraform {
   required_providers {
     google      = ">= 4.0.0, < 5.0.0"
     google-beta = ">= 4.0.0, < 5.0.0"
-    kubernetes  = "~>1.11.0"
-    helm        = "~>1.3.0"
+    kubernetes  = "~>2.11.0"
+    helm        = "~>2.5.0"
     random      = ">= 2.2.0"
     local       = ">= 1.2.0"
     null        = ">= 2.1.0"
@@ -32,7 +32,7 @@ data "google_client_config" "default" {
 }
 
 provider "kubernetes" {
-  load_config_file = false
+  #load_config_file = false
 
   host                   = "https://${module.cluster.cluster_endpoint}"
   token                  = data.google_client_config.default.access_token
@@ -49,7 +49,7 @@ provider "helm" {
     client_key             = base64decode(module.cluster.client_client_key)
     cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
 
-    load_config_file = false
+    #load_config_file = false
   }
 }
 

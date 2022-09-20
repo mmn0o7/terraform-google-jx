@@ -488,3 +488,16 @@ variable "content" {
   type        = string
   default     = ""
 }
+
+
+variable "cluster_initial_node_count" {
+  description = "Cluster initial node count"
+  type        = string
+  default     = ""
+}
+
+variable "primary_node_pool" {
+  description = "Enables primary node pool"
+  type        = bool
+  default     = true
+}

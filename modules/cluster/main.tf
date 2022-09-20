@@ -31,7 +31,7 @@ resource "google_container_cluster" "jx_cluster" {
   enable_legacy_abac        = var.enable_legacy_abac
   enable_shielded_nodes     = var.enable_shielded_nodes
   remove_default_node_pool  = true
-  initial_node_count        = var.min_node_count
+  initial_node_count        = var.cluster_initial_node_count
   logging_service           = var.logging_service
   monitoring_service        = var.monitoring_service
   default_max_pods_per_node = local.max_pods_per_node
@@ -101,6 +101,7 @@ resource "google_container_cluster" "jx_cluster" {
 }
 
 resource "google_container_node_pool" "primary" {
+  count = var.primary_node_pool? 1 : 0
   name               = "${var.cluster_name}-primary"
   location           = var.cluster_location
   cluster            = google_container_cluster.jx_cluster.name
